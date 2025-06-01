@@ -2,18 +2,18 @@
 // Lista de Alunos (Dados Base)
 // =============================
 const alunos = [
-  { nome: 'Ana Clara', livro: 'Introdução à Informática', turma: 'INFORMÁTICA', serie: '1º Ano' },
-  { nome: 'Bruno Lima', livro: 'Enfermeiro Moderno', turma: 'ENFERMAGEM', serie: '2º Ano' },
-  { nome: 'Carlos Souza', livro: 'Gestão Financeira', turma: 'FINANÇAS', serie: '3º Ano' },
-  { nome: 'Daniela Costa', livro: 'Estética Corporal', turma: 'ESTÉTICA', serie: '1º Ano' },
-  { nome: 'Eduardo Melo', livro: 'Enfermeiro Emergencial', turma: 'ENFERMAGEM', serie: '2º Ano' },
-  { nome: 'Fernanda Dias', livro: 'Finanças Pessoais', turma: 'FINANÇAS', serie: '3º Ano' },
-  { nome: 'Gabriel Rocha', livro: 'Redes de Computadores', turma: 'INFORMÁTICA', serie: '1º Ano' },
-  { nome: 'Helena Alves', livro: 'Cuidados Intensivos', turma: 'ENFERMAGEM', serie: '2º Ano' },
-  { nome: 'Isabela Martins', livro: 'Contabilidade Básica', turma: 'FINANÇAS', serie: '3º Ano' },
-  { nome: 'João Pedro', livro: 'Administração e Negócios', turma: 'ADMINISTRAÇÃO', serie: '1º Ano' },
-  { nome: 'Laura Fernandes', livro: 'Saúde e Bem-estar', turma: 'ENFERMAGEM', serie: '2º Ano' },
-  { nome: 'Marcos Vinícius', livro: 'Gestão de Investimentos', turma: 'FINANÇAS', serie: '3º Ano' }
+  { nome: 'Ana Clara', turma: 'INFORMÁTICA', serie: '1º Ano' },
+  { nome: 'Bruno Lima', turma: 'ENFERMAGEM', serie: '2º Ano' },
+  { nome: 'Carlos Souza', turma: 'FINANÇAS', serie: '3º Ano' },
+  { nome: 'Daniela Costa', turma: 'ESTÉTICA', serie: '1º Ano' },
+  { nome: 'Eduardo Melo', turma: 'ENFERMAGEM', serie: '2º Ano' },
+  { nome: 'Fernanda Dias', turma: 'FINANÇAS', serie: '3º Ano' },
+  { nome: 'Gabriel Rocha', turma: 'INFORMÁTICA', serie: '1º Ano' },
+  { nome: 'Helena Alves', turma: 'ENFERMAGEM', serie: '2º Ano' },
+  { nome: 'Isabela Martins', turma: 'FINANÇAS', serie: '3º Ano' },
+  { nome: 'João Pedro', turma: 'ADMINISTRAÇÃO', serie: '1º Ano' },
+  { nome: 'Laura Fernandes', turma: 'ENFERMAGEM', serie: '2º Ano' },
+  { nome: 'Marcos Vinícius', turma: 'FINANÇAS', serie: '3º Ano' }
 ];
 
 // =============================
@@ -31,7 +31,7 @@ function filtrarAlunos() {
 
   // Aplica os filtros sobre a lista de alunos
   alunosFiltrados = alunos.filter(aluno => {
-    const nomeOuTurmaOuSerie =  
+    const nomeOuTurmaOuSerie =
       aluno.nome.toLowerCase().includes(filtro) ||
       aluno.turma.toLowerCase().includes(filtro) ||
       aluno.serie.toLowerCase().includes(filtro);
@@ -55,15 +55,14 @@ function renderizarTabela() {
     const linha = `
       <tr>
         <td>${aluno.nome}</td>
-        <td>${aluno.livro}</td> <!-- Exibe o livro do aluno -->
         <td>${aluno.turma}</td>
         <td>${aluno.serie}</td>
         <td>
           <img 
             class="edit-icon" 
-            src="IMGS/dev-icon.png" 
-            title="Devolver" 
-            alt="Devolver" 
+            src="IMGS/editor-user.png" 
+            title="Editar" 
+            alt="Editar" 
             onclick="editarAluno('${aluno.nome}')"
           >
         </td>
@@ -79,10 +78,12 @@ function renderizarTabela() {
 function editarAluno(nome) {
   alunoEmEdicao = alunosFiltrados.find(aluno => aluno.nome === nome);
 
-  // Aqui, ao invés de preencher os campos de edição, vamos apenas exibir o card
-  // Não preenchemos os dados do aluno
+  // Preenche os campos do formulário de edição
+  document.getElementById('edit-nome').value = alunoEmEdicao.nome;
+  document.getElementById('edit-turma').value = alunoEmEdicao.turma;
+  document.getElementById('edit-serie').value = alunoEmEdicao.serie;
 
-  // Exibe o card de edição sem dados
+  // Exibe o card de edição
   document.getElementById('edit-card').style.display = 'flex';
 }
 
@@ -94,16 +95,19 @@ function fecharCard() {
 }
 
 // =============================
-// Salvar Alterações (Confirmação de Devolução)
+// Salvar Alterações
 // =============================
 function salvarEdicoes() {
-  // Aqui, podemos realizar a lógica de confirmação de devolução.
-  // Mas como os campos não são preenchidos no card, apenas podemos simular a devolução.
+  const novoNome = document.getElementById('edit-nome').value;
+  const novaTurma = document.getElementById('edit-turma').value;
+  const novaSerie = document.getElementById('edit-serie').value;
 
-  alert("Devolução confirmada!");
+  // Atualiza os dados do aluno em edição
+  alunoEmEdicao.nome = novoNome;
+  alunoEmEdicao.turma = novaTurma;
+  alunoEmEdicao.serie = novaSerie;
 
-  // Re-renderiza a tabela
-  renderizarTabela(); 
+  renderizarTabela(); // Re-renderiza a tabela
   fecharCard();       // Fecha o card de edição
 }
 
