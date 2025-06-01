@@ -1,6 +1,6 @@
 *{
-    font-family:"Kanit", sans-serif;
-    margin:0;
+    font-family:"Kanit";
+    margin: 0;
     padding:0;
 }
 .title-main-page {
@@ -17,13 +17,14 @@ body{
     flex: 1;
     padding: 20px;
 }
+
 /* ========================================== */
 /* Barra Lateral - estrutura e expansão */
 /* ========================================== */
 .barra_lateral {
     display: flex;
-    position:relative;
-    height: 118vh !important;
+    position: relative;
+    height: 120vh !important;
     width: 60px;
     background: url(IMGS/Estrutura/bars.png) center/cover no-repeat;
     border-top-right-radius: 20px;
@@ -345,11 +346,12 @@ thead tr th {
     color: rgb(0, 0, 0);
     position: sticky;
     top: 0;
+    text-align: center; /* Centraliza o cabeçalho */
 }
 
 th, td {
     padding: 12px 15px;
-    text-align: left;
+    text-align: center; /* Centraliza os dados das células */
     border: 3px solid #F1F1F1;
     background: #e3e1e1;
 }
@@ -366,18 +368,22 @@ tr:hover {
    Colunas Específicas
 ============================= */
 .col-nome {
-    width: 40%;
+    width: 30%;
+}
+
+.col-livro {
+    width: 30%; /* Nova coluna "Livro" */
 }
 
 .col-turma {
-    width: 4%;
+    width: 20%;
 }
 
 .col-serie {
-    width: 2%;
+    width: 10%;
 }
 
 .col-edicao {
-    width: 2%;
+    width: 10%;
     text-align: center;
 }
